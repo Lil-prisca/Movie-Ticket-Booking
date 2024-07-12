@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Transactions{% endblock title %}
+
+{% block subtitle %}Transactions{% endblock subtitle %}
+
+{% block main %}
+
+
+<div class="section-padding">
+    <div class="container">
+        <div class="order">
+            <p class="thank">SUBSCRIPTION HISTORY</p>
+            <table class="table">
+                <tr>
+                    <th>Subscription Type</th>
+                    <th>Price (#)</th>
+                    <th>Date</th>
+                </tr>
+
+                {% if payments %}
+                {% for pay in payments %}
+                <tr>
+                    <td>{{ pay.subscription_type.name }}</td>
+                    <td>{{ pay.subscription_type.price }}</td>
+                    <td>{{ pay.date }}</td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="3">No available subscription payment</td>
+                </tr>
+                {% endif %}
+            </table>
+        </div>
+
+        <div class="order">
+            <p class="thank">SNACK ORDER HISTORY</p>
+            <table class="table">
+                <tr>
+                    <th>Snack</th>
+                    <th>Quantity</th>
+                    <th>Restaurant</th>
+                    <th>Price (#)</th>
+                    <th>Date</th>
+                </tr>
+
+                {% if snack_order %}
+                {% for order in snack_order %}
+                <tr>
+                    <td>{{ order.snack.name }}</td>
+                    <td>{{ order.quantity }}</td>
+                    <td>{{ order.restaurant.name }}</td>
+                    <td>{{ order.total_price }}</td>
+                    <td>{{ order.date }}</td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="5">No available snack order</td>
+                </tr>
+                {% endif %}
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock main %}
+
